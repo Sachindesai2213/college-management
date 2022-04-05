@@ -18,8 +18,12 @@ from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
+    path('', include('info.urls')),
+    path('/api/', include('api.urls')),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
